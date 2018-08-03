@@ -26,23 +26,19 @@ public class CatController : MonoBehaviour
     private void Awake()
     {
         myRB = gameObject.GetComponent<Rigidbody2D>();
-        arm = GameObject.Find("arm");
-       
+        arm = GameObject.Find("arm");      
     }
 
     // Use this for initialization
     void Start()
     {
         gravity = (2 * maxJumpHeight / Mathf.Pow(timeToJumpApex, 2)); // Set gravity;
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex; // Set jumpVelocity
-
-       
+        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex; // Set jumpVelocity      
     }
 
     // Update is called once per frame
     void Update()
     {
-
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
