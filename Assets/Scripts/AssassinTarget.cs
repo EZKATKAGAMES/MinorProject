@@ -7,6 +7,7 @@ public class AssassinTarget : MonoBehaviour
     public bool alive;
     public float health = 50f;
     float damage = 1.2f;
+    bool isLured; // Is this enemy being lured?
 
     // Use this for initialization
     void Start()
@@ -30,8 +31,23 @@ public class AssassinTarget : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        health -= damage * collision.relativeVelocity.magnitude; //line 1
+        if(collision.gameObject.tag != "Player")
+        {
+            health -= damage * collision.relativeVelocity.magnitude; // Take damage from objects
+        }
+
+        
+       
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "CuteEffectRadius")
+        {
+            isLured = true;
+        }
+    }
+
 
 
     private void OnGUI()

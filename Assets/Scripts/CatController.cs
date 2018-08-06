@@ -5,6 +5,7 @@ using UnityEngine;
 public class CatController : MonoBehaviour
 {
     public bool leap;
+    public bool leapComplete;
     public bool grounded;
     public bool smack;
     public Rigidbody2D myRB;
@@ -14,19 +15,24 @@ public class CatController : MonoBehaviour
     Vector3 p2;
 
     Vector3 input;
+    float h;
+    float v;
     public float moveSpeed;
     public float timeToJumpApex;
     public float maxJumpHeight;
     public float multiplier;
     float gravity;
     float jumpVelocity;
+    HorizontalVerticalVelocity axes;
     
 
 
     private void Awake()
     {
         myRB = gameObject.GetComponent<Rigidbody2D>();
-        arm = GameObject.Find("arm");      
+        arm = GameObject.Find("arm");
+        axes = GetComponent<HorizontalVerticalVelocity>();
+
     }
 
     // Use this for initialization
@@ -39,37 +45,39 @@ public class CatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        h = axes.horizontalVelocity;
+        v = axes.verticalVelocity;
+
+        #region Get Mouse Direction
+        // Leap direction is based on the 2D position of cursor in worldspace.
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
+        // Direction of mouse from the gameObject.
         Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        #endregion
 
-        
-
+        #region Activate Leap, Swipe, Furball and Cutemode?
+        // On right mouse, prepare to leap
         if (Input.GetMouseButtonDown(1))
         {
             leap = true;
+            Debug.Log("jump");
         }
-
-        if (Input.GetMouseButton(0))
+        // On left mouse, jab with your paw.
+        if (Input.GetMouseButtonDown(0))
         {
             smack = true;
         }
+        // Furball
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            smack = false;
-            
-        }
-        
+        // Cutemode
+        if(GameManager.GM)
 
-        
+        #endregion
 
-        float v = Input.GetAxis("Vertical") * 2;
-        float h = Input.GetAxis("Horizontal") * 2;
 
         
-
+       
         if (grounded)
         {
             input = new Vector3(h, 0, v);
@@ -89,7 +97,7 @@ public class CatController : MonoBehaviour
             if (Input.GetMouseButtonUp(1))
             {
                 grounded = false;
-                myRB.AddForce(direction * maxJumpHeight, ForceMode2D.Impulse);
+                myRB.AddForce(direction * jumpVelocity, ForceMode2D.Impulse);
                 
             }
         }
@@ -98,8 +106,15 @@ public class CatController : MonoBehaviour
 
     IEnumerator leapTimer()
     {
-        yield return new WaitForSeconds(2);
-        leap = false;
+
+        
+
+        if (leapComplete)
+        {
+            leap = false;
+        }
+        yield return new WaitForSeconds(0);
+       
     }
 
 
@@ -122,6 +137,14 @@ public class CatController : MonoBehaviour
         if (GameManager.GM.levelCompleted)
         {
             Debug.Log("You escaped");
+        }
+
+        // Check if the leap has completed.
+        // If we collide with a non Trigger entity.
+        if (leapComplete == false && collision.isTrigger == false)
+        {
+            // end the leap
+            leapComplete = true;
         }
     }
 
