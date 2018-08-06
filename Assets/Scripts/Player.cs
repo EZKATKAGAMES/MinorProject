@@ -134,9 +134,9 @@ public class Player : MonoBehaviour
         if (Input.GetKey(GameManager.GM.Leap))
         {
             leapStrength += Time.deltaTime;
-            if(leapStrength >= 3.5f)
+            if(leapStrength >= 2.5f)
             {
-                leapStrength = 3.5f;
+                leapStrength = 2.5f;
             }
         }
 
