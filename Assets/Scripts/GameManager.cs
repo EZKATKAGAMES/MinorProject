@@ -15,9 +15,16 @@ public class GameManager : MonoBehaviour
     public KeyCode Cute { get; set; }
     public KeyCode MoveRight { get; set; }
     public KeyCode MoveLeft { get; set; }
-    public KeyCode NavigateNext { get; set; }
-    public KeyCode NavigatePrevious { get; set; }
-    
+    public KeyCode ClimbUp { get; set; }
+    public KeyCode ClimbDown { get; set; }
+    MouseInformation mouse;
+    public struct MouseInformation
+    {
+        public Vector2 mousePosition2D;
+        public Vector2 mouseDirection;
+    }
+    public GameObject PlayerReference;
+    public Vector2 lastClickPosition;
 
     private void Awake()
     {
@@ -41,8 +48,8 @@ public class GameManager : MonoBehaviour
         MoveRight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Mrkey", "D"));
         MoveLeft = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Mlkey", "A"));
         // Action
-        NavigateNext = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Next", "UpArrow"));
-        NavigatePrevious = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Prev", "DownArrow"));
+        ClimbUp = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Up", "W"));
+        ClimbDown = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Down", "S"));
         // Mouse Actions
         Leap = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Leap", "Mouse1"));
         Jab = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jab", "Mouse0"));
@@ -53,6 +60,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         levelCompleted = false;
+        PlayerReference = GameObject.Find("MainCat");
+        
     }
     
     
@@ -64,5 +73,18 @@ public class GameManager : MonoBehaviour
         {
             escapeTime -= Time.deltaTime;
         }
+
+        mouse.mousePosition2D = Input.mousePosition;
+        mouse.mousePosition2D = Camera.main.ScreenToWorldPoint(mouse.mousePosition2D);
+        mouse.mouseDirection = new Vector2(mouse.mousePosition2D.x - PlayerReference.transform.position.x,
+            mouse.mousePosition2D.y - PlayerReference.transform.position.y);
+
+        // All input calls where we may need the direction from that time.
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyUp(GameManager.GM.Furball))
+        {
+            lastClickPosition = mouse.mouseDirection;
+        }
     }
+
+    
 }

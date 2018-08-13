@@ -27,6 +27,11 @@ public class AssassinTarget : MonoBehaviour
         {
             alive = false;
         }
+
+        if(isLured == true)
+        {
+            // AI Change.
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -50,6 +55,9 @@ public class AssassinTarget : MonoBehaviour
 
 
 
+    
+
+    // testing
     private void OnGUI()
     {
         if (!alive)
