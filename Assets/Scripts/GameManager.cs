@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public KeyCode MoveLeft { get; set; }
     public KeyCode ClimbUp { get; set; }
     public KeyCode ClimbDown { get; set; }
-    MouseInformation mouse;
+    public  MouseInformation mouse;
     public struct MouseInformation
     {
         public Vector2 mousePosition2D;

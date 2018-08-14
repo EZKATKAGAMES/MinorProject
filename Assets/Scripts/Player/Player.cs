@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     private bool facingRight = true; // Which way is the player facing?
     private float groundRadius = 0.02f;
     private float ceilingRadius = 0.1f;
-    
+    private Vector2 initialPosition; // Position when leap is initiated.
 
     // References
     private Vector2 leapDirection; // Direction our velocity will change to.
@@ -69,12 +69,7 @@ public class Player : MonoBehaviour
 
 
 
-        if (climb)
-        {
-            airControl = false;
-            leaping = false;
-            rigid.Sleep();
-        }
+        
         
 
 
@@ -155,6 +150,9 @@ public class Player : MonoBehaviour
     {
         leaping = true;
         // Stop movement;
+        rigid.velocity = Vector2.zero;
+        // Record initial position.
+        initialPosition = transform.position;
 
         // Increase leap str
         if (Input.GetKey(GameManager.GM.Leap))
@@ -166,16 +164,12 @@ public class Player : MonoBehaviour
             }
         }
 
-        rigid.velocity = Vector2.zero;
+        
         // Draw predicted trajectory
 
 
 
-        Vector2 p;
-        float n;
-        Vector2 v;
-        float a;
-
+       
         
     }
 
@@ -199,6 +193,9 @@ public class Player : MonoBehaviour
         // Play land animation
 
     }
+
+
+   
 
     public void Jab()
     {
@@ -268,7 +265,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.layer == climbObject && leaping == true)
         {
             climb = true;
-               
+
+            // try restriction of rigid
+
+            // Stop gravity
+            rigid.gravityScale = 0;
+            // Stop cat (ignore previous velocity)
+            rigid.velocity = Vector2.zero;
         }  
     }
 
@@ -278,6 +281,8 @@ public class Player : MonoBehaviour
         if(collision.gameObject.layer == climbObject)
         {
             climb = false;
+            // Return back to normal gravity.
+            rigid.gravityScale = 3;
         }
         
     }
