@@ -64,10 +64,23 @@
     <Compile Include="Assets\furTrajectory.cs" />
     <Compile Include="Assets\Scripts\AssassinTarget.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Player\DrawTrajectory.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\UserControl.cs" />
     <Compile Include="Assets\Scripts\Utility\HorizontalVerticalVelocity.cs" />
     <Reference Include="UnityEditor.StandardEvents">
+<<<<<<< HEAD
+      <HintPath>C:/Users/harry/Documents/GitHub/EZKATKA/MinorProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/harry/Documents/GitHub/EZKATKA/MinorProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/harry/Documents/GitHub/EZKATKA/MinorProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/harry/Documents/GitHub/EZKATKA/MinorProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+=======
       <HintPath>E:/Work/MinorProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
@@ -78,6 +91,7 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:/Work/MinorProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+>>>>>>> 6a76622c5bbe3ce8a80f663d4177eda4947b7a4a
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -275,10 +289,17 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
+<<<<<<< HEAD
+      <HintPath>C:/Users/harry/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StandardEvents">
+      <HintPath>C:/Users/harry/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+=======
       <HintPath>C:/Users/User/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/User/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+>>>>>>> 6a76622c5bbe3ce8a80f663d4177eda4947b7a4a
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>

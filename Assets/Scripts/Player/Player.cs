@@ -164,13 +164,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        
+
         // Draw predicted trajectory
 
 
+        DrawTrajectory.Plot(rigid, transform.position, rigid.velocity, 30);
 
-       
         
+
     }
 
     public void Leap()
