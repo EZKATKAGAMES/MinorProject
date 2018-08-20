@@ -6,6 +6,8 @@ TagManager:
   tags:
   - furball
   - paw
+  - CameraMovementLeft
+  - CameraMovementRight
   layers:
   - Default
   - TransparentFX
