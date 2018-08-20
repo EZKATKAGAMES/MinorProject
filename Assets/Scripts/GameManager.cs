@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
     public float escapeTime;
 
 
+    public enum LayerCodes { Default0, TransparentFX1,
+    IgnoreRaycast2, NULL3, Water4, UI5, NULL6, NULL7,
+        Walkable8, Climb9, Hazard10}
+
+    public LayerCodes Layers;
+
     public KeyCode Leap { get; set; }
     public KeyCode Jab { get; set; }
     public KeyCode Furball { get; set; }
@@ -41,6 +47,8 @@ public class GameManager : MonoBehaviour
 
         levelCompleted = false;
         
+        
+
         // Ability
         Furball = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Furball", "LeftShift"));
         Cute = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("CuteMode", "Space"));

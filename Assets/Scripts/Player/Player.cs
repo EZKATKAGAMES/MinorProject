@@ -69,10 +69,7 @@ public class Player : MonoBehaviour
 
 
 
-        
-        
-
-
+       
     }
 
     void FixedUpdate()
@@ -211,9 +208,9 @@ public class Player : MonoBehaviour
 
     IEnumerator JabCD()
     {
-        arm.enabled = true;
+        //arm.enabled = true;
         yield return new WaitForSeconds(0.2f);
-        arm.enabled = false;
+        //arm.enabled = false;
     }
 
     public void Furball()

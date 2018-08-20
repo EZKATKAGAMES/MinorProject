@@ -19,21 +19,27 @@ public class UserControl : MonoBehaviour
     void Update()
     {
         #region Apply Movement
-        // Read inputs
-        float horizontalMovement = axes.horizontalVelocity;
 
-        //Pass all parameters to the character move
-        character.Move(horizontalMovement);
+       
+
+        if (character.climb == true)
+        {
+            character.Move(axes.verticalVelocity);
+        } else if (character.climb == false)
+        {
+            character.Move(axes.horizontalVelocity);
+        }
+
         #endregion
 
         #region Leap & jab & qtmode & furfire
 
-        if (Input.GetKey(GameManager.GM.Leap)) // Rightmouse press
+        if (Input.GetKey(GameManager.GM.Leap) && character.airControl == false) // Rightmouse press
         {
             character.LeapSetup();
         }
 
-        if (Input.GetKeyUp(GameManager.GM.Leap)) // Rightmouse release
+        if (Input.GetKeyUp(GameManager.GM.Leap) && character.airControl == false) // Rightmouse release
         {
             character.Leap();
             

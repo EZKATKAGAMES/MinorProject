@@ -17,9 +17,9 @@ TagManager:
   - 
   - Walkable
   - Climb
-  - 
-  - 
-  - 
+  - Hazard
+  - NoPlayerInteraction
+  - Jagaur
   - 
   - 
   - 
