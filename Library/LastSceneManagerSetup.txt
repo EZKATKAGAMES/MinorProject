@@ -1,6 +1,10 @@
 sceneSetups:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - path: Assets/Scenes/Kitchen.unity
+=======
+- path: Assets/Scenes/Prototype.unity
+>>>>>>> daa43185f276a53c0795524d951b0777b37b6c38
 =======
 - path: Assets/Scenes/Prototype.unity
 >>>>>>> daa43185f276a53c0795524d951b0777b37b6c38

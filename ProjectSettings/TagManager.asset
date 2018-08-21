@@ -14,6 +14,9 @@ TagManager:
   - CameraMovementRight
   - p1
   - p2
+<<<<<<< HEAD
+>>>>>>> daa43185f276a53c0795524d951b0777b37b6c38
+=======
 >>>>>>> daa43185f276a53c0795524d951b0777b37b6c38
   layers:
   - Default
