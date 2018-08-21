@@ -22,7 +22,7 @@ public class LineofSight : MonoBehaviour
         Vector2 point2 = new Vector2(-6.17f, -7.69f);
         float angle = Vector2.Angle(point1, point2);
         Vector2.Angle(point1, point2);
-        Debug.Log(angle);
+
         Debug.DrawLine(transform.position, point1);
         Debug.DrawLine(transform.position, point2);
 

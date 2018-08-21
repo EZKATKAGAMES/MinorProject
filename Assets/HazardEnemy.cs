@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Pathfinding;
+
 
 public class HazardEnemy : MonoBehaviour
 {
@@ -11,19 +11,25 @@ public class HazardEnemy : MonoBehaviour
     BoxCollider2D los;
     Rigidbody2D rigi;
     GameObject player;
+    Vector2 velocity;
 
-    // Use this for initialization
+    public bool isFree; // Captured or ? not
+
+    
     void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
         los = GetComponentInChildren<BoxCollider2D>();
         player = GameObject.Find("MainCat");
-        
+
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    
+    void Update()
     {
-        rigi.AddForce(new Vector2(1, 0));
+        if(isFree == true)
+        {
+            rigi.MovePosition(target.transform.position * 2 * Time.deltaTime);
+        }
     }
 }
