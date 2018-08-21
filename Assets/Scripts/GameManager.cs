@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     IgnoreRaycast2, NULL3, Water4, UI5, NULL6, NULL7,
         Walkable8, Climb9, Hazard10}
 
-    public LayerCodes Layers;
+    
 
     public KeyCode Leap { get; set; }
     public KeyCode Jab { get; set; }

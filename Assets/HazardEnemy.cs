@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class HazardEnemy : MonoBehaviour
 {
@@ -25,5 +25,18 @@ public class HazardEnemy : MonoBehaviour
     void LateUpdate()
     {
         rigi.AddForce(new Vector2(1, 0));
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Kitchen")
+        {
+            SceneManager.LoadScene("1");
+        }
+        
+        if (col.tag == "LivingRoom")
+        {
+            SceneManager.LoadScene("0");
+        }
     }
 }

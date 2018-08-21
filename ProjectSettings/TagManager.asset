@@ -6,8 +6,15 @@ TagManager:
   tags:
   - furball
   - paw
+<<<<<<< HEAD
+  - Kitchen
+  - LivingRoom
+=======
   - CameraMovementLeft
   - CameraMovementRight
+  - p1
+  - p2
+>>>>>>> daa43185f276a53c0795524d951b0777b37b6c38
   layers:
   - Default
   - TransparentFX
@@ -22,9 +29,9 @@ TagManager:
   - Hazard
   - NoPlayerInteraction
   - Jagaur
-  - 
-  - 
-  - 
+  - Human
+  - p1
+  - p2
   - 
   - 
   - 
