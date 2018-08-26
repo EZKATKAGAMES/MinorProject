@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,9 +47,6 @@ public class GameManager : MonoBehaviour
         #endregion
 
         levelCompleted = false;
-        
-        
-
         // Ability
         Furball = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Furball", "LeftShift"));
         Cute = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("CuteMode", "Space"));
@@ -71,8 +69,6 @@ public class GameManager : MonoBehaviour
         PlayerReference = GameObject.Find("MainCat");
         
     }
-    
-    
 
     // Update is called once per frame
     void Update()
@@ -91,6 +87,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyUp(GameManager.GM.Furball))
         {
             lastClickPosition = mouse.mouseDirection;
+        }
+    }
+
+    void OnTriggerEnter (Collider col)
+    {
+        if (col.tag == "Kitchen")
+        {
+            SceneManager.LoadScene(1);
+        }
+        if (col.tag == "LivingRoom")
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
