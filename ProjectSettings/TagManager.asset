@@ -8,6 +8,7 @@ TagManager:
   - paw
   - P1
   - P2
+  - LivingRoom
   layers:
   - Default
   - TransparentFX
@@ -17,11 +18,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Walkable
+  - Climb
+  - Hazard
+  - NoPlayerInteraction
+  - Human
   - 
   - 
   - 

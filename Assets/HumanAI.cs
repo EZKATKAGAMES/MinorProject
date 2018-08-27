@@ -16,7 +16,7 @@ public class HumanAI : MonoBehaviour
     public Vector2 p1, p2, cage, generator;
     bool isCycleComplete;
     bool move;
-    bool arrivedAtP1, arrivedAtP2;
+    public bool arrivedAtP1, arrivedAtP2;
     [SerializeField]
     int isAtStartingPoint=0; // 0 = p1, 1 = p2
     
