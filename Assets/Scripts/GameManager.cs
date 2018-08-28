@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager GM = null;
+    public static HorizontalVerticalVelocity HVvel;
     public bool levelCompleted { get; set; }
     public float escapeTime;
 
 
     public enum LayerCodes { Default0, TransparentFX1,
     IgnoreRaycast2, NULL3, Water4, UI5, NULL6, NULL7,
-        Walkable8, Climb9, Hazard10}
+        Walkable8, Climb9, Hazard10, NoPlayerInteraction11, Human12}
 
     
 
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
         }
         #endregion
 
+        HVvel = FindObjectOfType<HorizontalVerticalVelocity>();
+
         levelCompleted = false;
         // Ability
         Furball = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Furball", "LeftShift"));
@@ -73,6 +76,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
         if(levelCompleted == true)
         {
             escapeTime -= Time.deltaTime;

@@ -6,7 +6,7 @@ public class HumanAI : MonoBehaviour
 {
 
     public enum Behaviour {Patrol, CageInteraction, GeneratorInteraction, PlayerSpotted}
-    Behaviour currentState;
+    public Behaviour currentState;
     public Rigidbody2D rigi;
     public Vector2 velocity;
 
@@ -18,7 +18,7 @@ public class HumanAI : MonoBehaviour
     bool move;
     public bool arrivedAtP1, arrivedAtP2;
     [SerializeField]
-    int isAtStartingPoint=0; // 0 = p1, 1 = p2
+    public int isAtStartingPoint=0; // 0 = p1, 1 = p2
     
 
 
@@ -34,7 +34,7 @@ public class HumanAI : MonoBehaviour
         p1 = GameObject.Find("P1").transform.position;
         p2 = GameObject.Find("P2").transform.position;
 
-        cage = GameObject.Find("Cage").transform.position;
+        cage = GameObject.Find("---Cage---").transform.position;
         generator = GameObject.Find("Generator").transform.position;
 
         #endregion
@@ -118,7 +118,7 @@ public class HumanAI : MonoBehaviour
             if(arrivedAtP1)
             {
                 cycleCount++;
-                Debug.Log(cycleCount);
+              //  Debug.Log(cycleCount);
                 StartCoroutine(waitAtPosition());
             }
 
@@ -155,17 +155,21 @@ public class HumanAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "p2")
+        if(currentState == Behaviour.Patrol)
         {
-            arrivedAtP2 = true;
-            isAtStartingPoint = 1;
-            arrivedAtP1 = false;
+            if (collision.gameObject.tag == "P2")
+            {
+                arrivedAtP2 = true;
+                isAtStartingPoint = 0;
+                arrivedAtP1 = false;
+            }
+            else if (collision.gameObject.tag == "P1")
+            {
+                arrivedAtP1 = true;
+                isAtStartingPoint = 1;
+                arrivedAtP2 = false;
+            }
         }
-        else if(collision.gameObject.tag == "p1")
-        {
-            arrivedAtP1 = true;
-            isAtStartingPoint = 0;
-            arrivedAtP2 = false;
-        }
+        
     }
 }

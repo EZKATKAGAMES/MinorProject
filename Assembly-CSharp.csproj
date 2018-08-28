@@ -61,8 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AutoCameraSetup.cs" />
-    <Compile Include="Assets\CameraMovement.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -121,13 +119,13 @@
     <Compile Include="Assets\HazardEnemy.cs" />
     <Compile Include="Assets\HumanAI.cs" />
     <Compile Include="Assets\LineofSight.cs" />
-    <Compile Include="Assets\MoveCamera.cs" />
     <Compile Include="Assets\Padlock.cs" />
     <Compile Include="Assets\Scripts\AssassinTarget.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Player\DrawTrajectory.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\UserControl.cs" />
+    <Compile Include="Assets\Scripts\Utility\AutoCameraSetup.cs" />
     <Compile Include="Assets\Scripts\Utility\HorizontalVerticalVelocity.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

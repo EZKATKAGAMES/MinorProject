@@ -13,6 +13,7 @@ public class Padlock : MonoBehaviour
 
     void Start()
     {
+        alive = true;
         cageDoor = GameObject.Find("Cage Door");
         anim = cageDoor.GetComponent<Animator>();
     }

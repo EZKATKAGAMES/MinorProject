@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class detect : MonoBehaviour
 {
-
-    // Use this for initialization
+    HazardEnemy talking;
     void Start()
     {
-
+        talking = GameObject.Find("hazardanimal").GetComponent<HazardEnemy>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == 0)
+        if(talking.free == true)
         {
-            Debug.Log("enemy ac130 inbound");
-
-
-            
+            if (collision.gameObject.layer == 12)
+            {
+                talking.attackEntitiy = true;
+                
+                HumanAI changeBehaviour = collision.GetComponent<HumanAI>();
+                // Stop running behaviours
+                changeBehaviour.isAtStartingPoint = 3;
+                
+            }
         }
-
         
     }
 }

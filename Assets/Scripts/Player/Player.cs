@@ -32,8 +32,13 @@ public class Player : MonoBehaviour
 
     // References
     private Vector2 leapDirection; // Direction our velocity will change to.
-    private Vector2 direction; // The Live direction of the mouse.
-    
+    public Vector2 direction; // The Live direction of the mouse.
+    public Vector2 furDirection; // recorded direction the furball will face.
+    public Transform cameraPeek;
+    public bool climbMovement;
+    public float furBallStrength =5f;
+
+    public bool usedFurball;
     private Transform ceilingCheck;
     private Transform groundCheck;
     private Animator anim;
@@ -58,6 +63,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        
 
         #region Mouse Direction
         // Leap direction is based on the 2D position of cursor in worldspace.
@@ -127,6 +133,11 @@ public class Player : MonoBehaviour
             if (airControl && !leaping && !climb)
             rigid.velocity = new Vector2(move * maxSpeed, rigid.velocity.y);
 
+            if(climb && climbMovement)
+            {
+                rigid.velocity = new Vector2(move * maxSpeed / 3 , rigid.velocity.y);
+            }
+
             // If the input is moving player right
             if (move > 0 && !facingRight)
             {
@@ -154,10 +165,10 @@ public class Player : MonoBehaviour
         // Increase leap str
         if (Input.GetKey(GameManager.GM.Leap))
         {
-            leapStrength += Time.deltaTime;
-            if(leapStrength >= 2.5f)
+            leapStrength += Time.deltaTime * 10;
+            if(leapStrength >= 20.5f)
             {
-                leapStrength = 2.5f;
+                leapStrength = 20.5f;
             }
         }
 
@@ -181,11 +192,11 @@ public class Player : MonoBehaviour
         // Leap into the air
         #region Leap Velocity
         Debug.Log("jumping");
-        rigid.AddForce(leapDirection * leapStrength, ForceMode2D.Impulse);
+        rigid.AddForce(leapDirection.normalized * leapStrength, ForceMode2D.Impulse);
         #endregion
 
         // return leap str
-        leapStrength = 1;
+        leapStrength = 5;
 
         
         // Play land animation
@@ -213,10 +224,38 @@ public class Player : MonoBehaviour
         //arm.enabled = false;
     }
 
-    public void Furball()
+    public void FurballCharge()
     {
+        
+        // Stop player movement
+        rigid.velocity = Vector2.zero;
+        // record direction
+        furDirection = direction;
+        
+        // Charge the strength modifier.
+        furBallStrength += Time.deltaTime * 5;
 
-        Instantiate(furballProjectile);
+        if(furBallStrength >= 25f)
+        {
+            furBallStrength = 25;
+        }
+        
+
+    }
+
+    public void FurballRelease()
+    {
+        Instantiate(furballProjectile, transform.position, Quaternion.identity);
+        StartCoroutine(FurballCD());
+        
+    }
+
+    IEnumerator FurballCD()
+    {
+        usedFurball = true;
+        yield return new WaitForSeconds(2);
+        
+        usedFurball = false;
     }
 
     public void CuteMode()
@@ -264,12 +303,21 @@ public class Player : MonoBehaviour
         {
             climb = true;
 
-            // try restriction of rigid
-
             // Stop gravity
             rigid.gravityScale = 0;
             // Stop cat (ignore previous velocity)
-            rigid.velocity = Vector2.zero;
+            if(GameManager.HVvel.inputRecieved == false)
+            {
+                rigid.velocity = Vector2.zero;
+                climbMovement = false;
+            }
+            else if (GameManager.HVvel.inputRecieved)
+            {
+                Debug.Log("works");
+                climbMovement = true;
+            }
+                
+            
         }  
     }
 

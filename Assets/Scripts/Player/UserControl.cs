@@ -46,16 +46,25 @@ public class UserControl : MonoBehaviour
         }
 
         // Begin charging
-        if (Input.GetKeyDown(GameManager.GM.Furball))
+        if (Input.GetKey(GameManager.GM.Furball))
         {
-            character.Furball();
-            // Create timer & cooldown.
+            if (character.usedFurball == false)
+            {
+                character.FurballCharge();
+            }
+             
+           
         }
 
         // On release (unfinished charge)
         if (Input.GetKeyUp(GameManager.GM.Furball))
         {
-            character.Furball();
+            if(character.usedFurball == false)
+            {
+                character.FurballRelease();
+                
+            }
+           
         }
 
         if (Input.GetKeyDown(GameManager.GM.Jab)) // Leftmouse

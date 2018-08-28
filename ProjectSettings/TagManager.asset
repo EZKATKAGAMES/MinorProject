@@ -23,8 +23,8 @@ TagManager:
   - Hazard
   - NoPlayerInteraction
   - Human
-  - 
-  - 
+  - HazardNoInteraction
+  - HumanNoInteraction
   - 
   - 
   - 

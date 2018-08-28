@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33554530566327172}
   - component: {fileID: 23108279921267318}
   - component: {fileID: 70518723068210564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: arm
   m_TagString: paw
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4843425246489664}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4663445546562212}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906870896164684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.78, y: -0.58, z: 0}
+  m_LocalPosition: {x: -1.7869298, y: -0.7226019, z: 0}
   m_LocalScale: {x: 0.28, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4389080144640444}
@@ -268,19 +268,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 3
-  leapStrength: 2
+  leapStrength: 5
   slowMultiplier: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   airControl: 0
-  grounded: 0
+  grounded: 1
   climb: 0
   climbing: 0
   leaping: 0
   leaped: 0
   cuteMode: 0
   furBall: 0
+  direction: {x: 16.402096, y: 4.453002}
+  furDirection: {x: 0, y: 0}
+  cameraPeek: {fileID: 0}
+  climbMovement: 0
+  furBallStrength: 5
+  usedFurball: 0
 --- !u!114 &114744422746488604
 MonoBehaviour:
   m_ObjectHideFlags: 1
