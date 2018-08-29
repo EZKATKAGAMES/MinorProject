@@ -57,7 +57,7 @@ public class AutoCameraSetup : MonoBehaviour
        
         // TODO: Increase camera look when leaping.
 
-        // If we are leaping, increase the yandx offset.
+        // If we are leaping, increase the yandx offset. (set a new look target ahead in the direction of the mouse)
         if (playerRef.leaping == true)
         {
             

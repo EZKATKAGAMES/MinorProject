@@ -9,22 +9,23 @@ public class LineofSight : MonoBehaviour
     // This cone is restricted to a radius.
     // Scan this cone for the player.
 
+    Player playerRef;
+    Vector2 direction;
+
     // Use this for initialization
     void Start()
     {
+        playerRef = GameObject.Find("MainCat").GetComponent<Player>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 point1 = new Vector2(-6.17f, -1.69f);
-        Vector2 point2 = new Vector2(-6.17f, -7.69f);
-        float angle = Vector2.Angle(point1, point2);
-        Vector2.Angle(point1, point2);
 
-        Debug.DrawLine(transform.position, point1);
-        Debug.DrawLine(transform.position, point2);
+        //Calculate Direction between the player and the human.
+        direction = playerRef.transform.position - transform.position;
+        // Compare the angle of 
 
 
     }
