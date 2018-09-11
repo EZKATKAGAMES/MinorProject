@@ -23,10 +23,6 @@ public class DrawTrajectory : MonoBehaviour
             moveStep *= drag;
             pos += moveStep;
             results[i] = pos;
-
-
-
-
            
         }
 

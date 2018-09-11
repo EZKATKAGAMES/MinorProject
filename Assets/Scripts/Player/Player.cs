@@ -8,14 +8,17 @@ public class Player : MonoBehaviour
     [Header ("Player Settings")]
     public float maxSpeed = 10f; // Fastest speed the player can travel
     public float leapStrength = 1f;
+    public float leapStrengthModifier = 20f;
     public float slowMultiplier = 2;
 
+    // Player Grounded Status
     public LayerMask whatIsGround; //A layer mask to indicate ground
+    public LayerMask obstructionAbove; // Layers which block the player from climbing vertically.
     int climbObject = 9; // You may climb objects on this layer.
     public bool airControl = false; // Allow steering while in air
     public bool grounded = false; // Checking if we are grounded
+    public bool canVerticalClimb = false; // Check if we can climb vertically.
     public bool climb;
-    public bool climbing;
 
     // indicate what actions the player is doing
     public bool leaping;
@@ -23,7 +26,7 @@ public class Player : MonoBehaviour
     public bool cuteMode;
     public bool furBall;
 
-    GameObject furballProjectile;
+    public bool usedFurball;
 
     private bool facingRight = true; // Which way is the player facing?
     private float groundRadius = 0.02f;
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
     private Vector2 initialPosition; // Position when leap is initiated.
 
     // References
+    GameObject furballProjectile;
     private Vector2 leapDirection; // Direction our velocity will change to.
     public Vector2 direction; // The Live direction of the mouse.
     public Vector2 furDirection; // recorded direction the furball will face.
@@ -38,13 +42,14 @@ public class Player : MonoBehaviour
     public bool climbMovement;
     public float furBallStrength =5f;
 
-    public bool usedFurball;
+    
     private Transform ceilingCheck;
     private Transform groundCheck;
     private Animator anim;
     private Rigidbody2D rigid;
     private SpriteRenderer rend;
     private BoxCollider2D arm;
+    
     #endregion
 
     // Use this for initialization
@@ -64,7 +69,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         
-
         #region Mouse Direction
         // Leap direction is based on the 2D position of cursor in worldspace.
         Vector3 mousePos = Input.mousePosition;
@@ -73,15 +77,14 @@ public class Player : MonoBehaviour
         direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
         #endregion
 
-
-
-       
     }
 
     void FixedUpdate()
     {
         // Performing ground check (using Physics2D)
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+
+        canVerticalClimb = !Physics2D.OverlapCircle(ceilingCheck.position, ceilingRadius, obstructionAbove);
 
         if (!climb)
         {
@@ -121,7 +124,7 @@ public class Player : MonoBehaviour
         float airDir = 0;
 
         //Only control player if grounded or airControl is on
-        if (grounded || airControl)
+        if (grounded || airControl || climb)
         {
             //anim.SetFloat("Speed", Mathf.Abs(move));
 
@@ -133,10 +136,36 @@ public class Player : MonoBehaviour
             if (airControl && !leaping && !climb)
             rigid.velocity = new Vector2(move * maxSpeed, rigid.velocity.y);
 
-            if(climb && climbMovement)
+            //(temporary because velocity wont change while climbing)
+            // Movement for when we are climbing and object
+            if(climb)
             {
-                rigid.velocity = new Vector2(move * maxSpeed / 3 , rigid.velocity.y);
+                if(GameManager.HVvel.horizontalVelocity > 0)
+                {
+                    rigid.AddForce(Vector2.right * maxSpeed, ForceMode2D.Force);
+                }
+
+                if (GameManager.HVvel.horizontalVelocity < 0)
+                {
+                    rigid.AddForce(Vector2.left * maxSpeed, ForceMode2D.Force);
+                }
+
+                if(GameManager.HVvel.verticalVelocity < 0)
+                {
+                    rigid.AddForce(Vector2.down, ForceMode2D.Force);
+                }
+
             }
+
+            // If the cieling check does not collide with anything and we are climbing
+            // then nothing is obstructing us from climbing up.
+            //  (allow climb above to new platform.
+            if (climb && canVerticalClimb == false)
+            {
+
+            }
+
+
 
             // If the input is moving player right
             if (move > 0 && !facingRight)
@@ -149,6 +178,8 @@ public class Player : MonoBehaviour
                 Flip();
                 airDir = -1;
             }
+
+            
         }
 
         
@@ -165,7 +196,7 @@ public class Player : MonoBehaviour
         // Increase leap str
         if (Input.GetKey(GameManager.GM.Leap))
         {
-            leapStrength += Time.deltaTime * 10;
+            leapStrength += Time.deltaTime * leapStrengthModifier;
             if(leapStrength >= 20.5f)
             {
                 leapStrength = 20.5f;
