@@ -102,9 +102,9 @@ public class Player : MonoBehaviour
         Debug.DrawLine(Vector2.zero, direction * 1000);
         #endregion
 
-
+        float horizontalVelocityFloat = GameManager.HVvel.horizontalVelocity;
         
-        //anim.SetFloat("vSpeed", rigid.velocity.y);
+        anim.SetInteger("Walk", (int)horizontalVelocityFloat);
     }
 
     private void OnDrawGizmos()
